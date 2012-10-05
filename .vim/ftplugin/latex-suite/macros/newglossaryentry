@@ -1,0 +1,5 @@
+\newglossaryentry{<+key+>}
+{
+name={<+name+>},
+description={<+desc+>}
+}<++>

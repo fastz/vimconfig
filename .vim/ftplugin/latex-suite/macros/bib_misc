@@ -1,0 +1,7 @@
+@misc{<+key+>,
+author="<+author+>",
+title="<+title+>",
+year="<+year+>",
+month="<+month+>",
+howpublished="\url{<+url+>}"
+}
