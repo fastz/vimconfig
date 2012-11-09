@@ -1,3 +1,5 @@
+
+set nocompatible
 "settings for pathogen plugin
 filetype off
 call pathogen#runtime_append_all_bundles()
@@ -5,11 +7,10 @@ syntax on
 filetype plugin indent on
 
 "disable compatibility to vi
-set nocompatible
 set modelines=0
 set modifiable
 
-"select colorscheme
+"select colorscheme only if gui is running
 if has('gui_running')
   colorscheme vividchalk
   set guifont=DejaVuSansMono \9
@@ -68,7 +69,7 @@ set formatoptions=qrn1
 set list
 set listchars=tab:▸\ ,eol:¬
 
-
+"ignore arrow keys because they are not needed
 nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
@@ -77,6 +78,7 @@ inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
+
 nnoremap j gj
 nnoremap k gk
 
@@ -93,13 +95,27 @@ au FocusLost * :wa
 
 
 nnoremap <leader>w <C-w>v<C-w>l
+
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-autocmd VimEnter * NERDTree
-autocmd VimEnter * wincmd p
+"convinience function to start nerdtree
+function! EnterNerdTree()
+  autocmd VimEnter * NERDTree
+  autocmd VimEnter * wincmd p
+endfunction
+
+function! NerdtreeToggle()
+  autocmd VimEnter * NERDTree
+endfunction
+
+"load nerdtree only if gvim is used
+if has('gui_running')
+  :call EnterNerdTree()
+endif
+
 set mouse=a
 
 function! NumberToggle()
@@ -110,6 +126,8 @@ function! NumberToggle()
   endif
 endfunc
 set number
+
 nnoremap <C-n> :call NumberToggle()<cr>
+nnoremap <C-y> :call NerdtreeToggle()<cr> 
 
 
